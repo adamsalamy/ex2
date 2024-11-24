@@ -3,7 +3,6 @@ Name:Adam Salamy
 ID:322726068
 Assignment: ex2
 *******************/
-
 #include <stdio.h>
 
 int main() {
@@ -247,37 +246,42 @@ int main() {
                 printf("\n");
             }
             else if (choice == 6) {
-                int smile = 0;
-                int cheer = 0;
+                int smile;
+                int cheer;
                 int MaxNumber = 0;
                 int flag = 1;
                 printf("Enter a smile and cheer number:\n");
 
                 while (flag) {
-                    int valid = scanf("smile: %d, cheer: %d", &smile, &cheer);
-                    while (valid != 2 || smile < 1 || cheer < 1 || smile == cheer) {
-                        printf("Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
-                        scanf("%*[^\n]%*c");// cleaning input buffer
-                        valid = scanf("smile: %d, cheer: %d", &smile, &cheer);
-                    }
+
+                    int valid = scanf(" smile : %d , cheer : %d", &smile, &cheer);
+
+                    // Check if the input matches the format and conditions
+                    if (valid == 2 && smile > 0 && cheer > 0 && smile != cheer)
+                    {
                     flag = 0;
+                    } else {
+                        printf("Only 2 different positive numbers in the given format are allowed for the festival, please try again:\n");
+
+                        // Cleaning input buffer with negated scanset
+                        scanf("%*[^\n]");
+                        scanf("%*c");
+                    }
                 }
                 printf("Enter maximum number for the festival:\n");
 
                 while (1) {
-                    int valid = scanf("%d", &MaxNumber);
-
+                    int valid = scanf(" %d", &MaxNumber);
                     if (valid != 1 || MaxNumber < 1) {
                         printf("Only positive maximum number is allowed, please try again:\n");
-
-                        // Clear invalid input
-                        scanf("%*[^\n]%*c");
+                        scanf("%*[^\n]");
                     } else {
                         break; // Valid input, exit the loop
                     }
                 }
 
-                for (int i = 1; i < MaxNumber + 1; ++i) {
+                for (int i = 1; i < MaxNumber + 1; ++i)
+                {
                     if(i % smile == 0 && i % cheer == 0){
                         printf("Festival!\n");
                         continue;
